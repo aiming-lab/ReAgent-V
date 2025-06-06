@@ -1,5 +1,5 @@
 # ReAgent-V
-This repository contains the official implementation for the paper: [Paper]() .
+This repository contains the official implementation for the paper: [Paper](https://arxiv.org/abs/2506.01300) .
 
 ## Applications
 
