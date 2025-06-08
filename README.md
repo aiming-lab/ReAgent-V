@@ -32,7 +32,7 @@
 
   
 ## News
-* 🔥 [10.03] Our paper is online now: https://arxiv.org/abs/2506.01300.
+🔥 **\[June 2, 2025]** Our latest paper is now live on arXiv: [arXiv:2506.01300](https://arxiv.org/abs/2506.01300)!
 
 
 ---
