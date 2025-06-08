@@ -4,16 +4,7 @@ This repository contains the official implementation of
 
 **[ReAgent-V: A Reward-Driven Multi-Agent Framework for Video Understanding](https://arxiv.org/abs/2506.01300)**.
 
-**ReAgent-V** is a video reasoning framework with key features:
-
-- **Modular design** for flexible system composition  
-- **Tool integration** (e.g., OCR, ASR, object detection)  
-- **Reward-aware inference** for real-time self-correction  
-- **Adaptive model alignment** based on feedback  
-- **Smart data selection** for better training samples  
-- **Entropy-based frame selection** to choose informative frames  
-- **Multi-view reflection** (conservative, neutral, aggressive)  
-
+**ReAgent-V** is a modular video reasoning framework that supports tool integration (e.g., OCR, ASR, object detection), reward-aware inference, adaptive model alignment, smart data selection, entropy-based frame selection, and multi-view reflection (conservative, neutral, aggressive).
 
 ---
 
