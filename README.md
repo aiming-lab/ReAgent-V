@@ -67,12 +67,6 @@ Aligns **Vision-Language-Action (VLA)** models using **Trajectory-wise Preferenc
 - 📁 Module: `Application/VLA-Alignment`  
 - 📘 Instructions: [VLA Alignment README](https://github.com/aiming-lab/ReAgent-V/blob/main/Application/VLA-Alignment/README.md)
 
-### 🔍 Video LLM Reasoning *(Coming Soon)*  
-Supports reflection-based evaluation and reward-guided sample curation for long-form video LLM fine-tuning using **GRPO** strategies.
-
-- 📁 Module: `Application/LLM-Reasoning`  
-
----
 
 ## 🧑‍💻 Getting Started
 
