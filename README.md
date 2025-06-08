@@ -30,7 +30,7 @@ ReAgent-V consists of two major components:
   Iteratively refines outputs by encouraging disagreement and consensus among diverse agent personas (conservative / neutral / aggressive).
 
 📄 **Technical Resources**  
-- ![Framework Overview](./assets/framework.png)  
+- ![Framework Overview](assets/framework.png)  
 - [⚙️ Prompt Templates and Tool Setup Guide](https://github.com/aiming-lab/ReAgent-V/blob/main/ReAgent-V/readme.md)
 
 ---
