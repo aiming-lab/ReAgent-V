@@ -187,7 +187,7 @@ qa_system = ReAgentV.load_default(path_dict)
 
 ---
 
-### 🎞️ 2. Frame Sampling — *Context-Aware Selection*
+### 🎞️ 2. Frame Sampling — *ECRS Based Selection*
 
 ```python
 frames, key_frames, ... = qa_system.load_and_sample_video(question, video_path)
@@ -198,14 +198,43 @@ frames, key_frames, ... = qa_system.load_and_sample_video(question, video_path)
 
 ---
 
-### 🛠️ 3. Visual Tool Invocation — *Dynamic Tool Use*
+### 🛠️ 3. Visual Tool Invocation — *Extensive and Dynamic Tool Use*
 
 ```python
 modal_info, ..., USE_OCR, USE_ASR, USE_DET = qa_system.retrieve_modal_info(...)
 ```
 
-* Tools like **OCR**, **ASR**, **Object Detection**, **Scene Graph** are triggered **based on question semantics**.
-* Tool usage flags are auto-determined or can be manually overridden.
+ReAgent-V is designed with extensibility in mind:
+**Adding new tools is as simple as listing the models and defining when & how they should be used.**
+
+**Workflow:**
+
+1. **List available models** for tool use (e.g., OCR, ASR, Scene Graph, Captioning, etc.)
+2. **Dynamically select tools** at runtime based on the input question or system prompt
+3. **Load tool-specific models** only when selected (lazy loading supported)
+4. **Call tool modules** to extract relevant information (text, objects, audio, graphs...)
+5. **Inject results into the multimodal prompt** via template composition
+
+```python
+# Example: dynamically select and use **part of the mentioned tools**
+if "OCR" in selected_tools:
+    ocr_result = run_ocr_model(...)
+if "ASR" in selected_tools:
+    asr_result = run_asr_model(...)
+if "Scene Graph" in selected_tools:
+    graph_result = run_scene_graph_model(...)
+
+# Build the prompt with available tool outputs
+prompt = build_multimodal_prompt(
+    question=question,
+    ocr=ocr_result,
+    asr=asr_result,
+    scene_graph=graph_result,
+    ...
+)
+```
+
+> ✅ This modular design makes it easy to plug in **any vision or language model**, route decisions through LLMs, and construct **task-aware prompts** using only the necessary tools.
 
 ---
 
@@ -215,30 +244,79 @@ modal_info, ..., USE_OCR, USE_ASR, USE_DET = qa_system.retrieve_modal_info(...)
 qs = qa_system.build_multimodal_prompt(...)
 ```
 
-* Combines question + OCR text + ASR transcript + DET results.
-* Templates are modular and can be adapted for different tasks (e.g., reasoning, captioning, QA).
+* Combines the **original question** with outputs from multiple sources:
+
+  * 📝 OCR-extracted text
+  * 🔊 ASR transcripts
+  * 🧱 Object Detection and Scene Graph outputs
+  * 🖼️ Other visual tools (e.g., captioning, layout analysis, retrieval cues)
+
+* Prompt templates are fully **modular** and can be tailored to diverse tasks, including:
+
+  * 🧠 Reasoning and inference
+  * 🎬 Video captioning and narration
+  * ❓ Multimodal question answering
+  * 🎯 Reward modeling and training signal generation
+
+> 🔄 Only relevant tools are incorporated based on task and context, enabling **minimal yet informative** prompt construction for efficient inference.
 
 ---
 
-### 🧠 5. Inference — *Flexible Backend Execution*
+### 🧠 5. Inference — *Flexible VLLM Integration* (using `llava_model` as an example)
 
 ```python
 initial_answer = llava_inference(qs, video_tensor)
 ```
 
-* Works with VLLM server, REST APIs, or custom inference backends.
-* Swap the engine without modifying core pipeline logic.
+* Performs inference using a **VLLM backend**, such as `llava_model`
+* Accepts the **composed multimodal prompt** and corresponding **video tensor embedding**
+* Designed for **backend flexibility** — you can easily swap in other models like **Qwen**, **Vicuna**, or any custom LLM API
+
+> 🔄 The inference interface is fully decoupled, allowing seamless integration with local, server-based, or cloud-hosted LLMs—no need to modify upstream processing logic.
+
 
 ---
 
 ### 🔄 6. Tool Re-selection via Critical Questions
 
 ```python
-critique_questions = qa_system.generate_critical_questions(...)
+updated_infos = {}
+for cq in critique_questions:
+    tool_selection_prompt = tool_retrieval_prompt_template.format(question=cq)
+    response_list = llava_inference(tool_selection_prompt, video=None)
+
+    USE_ASR = "ASR" in response_list
+    USE_OCR = "OCR" in response_list
+    USE_DET = "Scene Graph" in response_list
+
+    new_modal_info, new_det_top_idx, _, _, _ = qa_system.retrieve_modal_info(...)
+    updated_infos[cq] = new_modal_info
 ```
 
-* Automatically generates new questions to probe the initial answer.
-* Re-selects tools per follow-up question using language-only inference.
+This block implements **tool re-selection for each critique question**, enabling *question-specific multimodal retrieval*. Here's how it works:
+
+1. 🧠 **Language-based Tool Selection**
+   Each critical question (`cq`) is inserted into a **tool-selection prompt**, which is passed to the LLM (e.g., LLaVA) to decide:
+
+   * Do we need **OCR**?
+   * Do we need **ASR**?
+   * Do we need **Scene Graph**?
+
+2. ⚙️ **Tool Re-selection & Execution**
+   Based on the LLM's response (`response_list`), the pipeline:
+
+   * Sets `USE_OCR`, `USE_ASR`, `USE_DET` flags accordingly
+   * **Loads only the selected tools**
+   * **Executes them** to extract updated visual/audio/textual signals for the current question
+
+3. 🧩 **Multimodal Context Update**
+   The newly extracted tool outputs (`new_modal_info`) are stored in `updated_infos[cq]` for later reflection and evaluation.
+
+```python
+context_infos = {question: modal_info, **updated_infos}
+```
+
+> ✅ This design allows **fine-grained tool scheduling per question**, driven entirely by the model’s reasoning. Each follow-up question gets **its own dynamic retrieval plan**, making the system both efficient and contextually adaptive.
 
 ---
 
@@ -248,32 +326,51 @@ critique_questions = qa_system.generate_critical_questions(...)
 eval_report = qa_system.generate_eval_report(...)
 ```
 
-* Summarizes strengths, flaws, and missing evidence.
-* Can be reused as **reward signal** for RLHF, DPO, or GRPO-style training.
+* Generates a **structured critique** based on:
+
+  * The original question
+  * Initial model answer
+  * Multimodal context from both the main and critical questions
+* Provides a detailed summary of:
+
+  * ✅ Answer strengths
+  * ❌ Weaknesses and logical gaps
+  * 🔍 Missing visual/audio evidence
+
+> 🔁 This report **closes the reflection loop**, bridging multimodal evidence and LLM reasoning.
+> 🎯 It can also serve as a **reward signal** in downstream training via **RLHF**, **DPO**, or **GRPO**, making model updates **aligned with self-critique**.
 
 ---
 
-### 🪞 8. Reflective Answer Refinement
+### 🪞 8. Reflective Answer Refinement — *Self-Correction via Multi-Perspective Feedback*
 
 ```python
 final_answer = qa_system.get_reflective_final_answer(...)
 ```
 
-* Produces improved answers using multi-perspective critique.
-* Supports **conservative**, **neutral**, and **aggressive** reflection strategies.
+* Takes the **initial answer**, the **evaluation report**, and the original **video context**
+* Applies **multi-perspective refinement strategies** to improve factuality, coverage, and logic:
+
+  * 🛡️ **Conservative**: Minor surface-level edits
+  * ⚖️ **Neutral**: Entity-level consistency and corrections
+  * 🔍 **Aggressive**: Structural rethinking with logic and evidence updates
+
+> 🔁 This step completes the **feedback-driven refinement loop**, allowing the model to **self-correct** based on structured critique, retrieved multimodal context, and prior reasoning outputs.
 
 ---
 
 ## ✅ Flexibility Summary
 
-| Component             | Customizable Feature                                 |
-| --------------------- | ---------------------------------------------------- |
-| **Model Loader**      | Any VLLM, CLIP, ASR, Whisper via `path_dict`         |
-| **Prompt Templates**  | Modular, composable prompts for diverse task types   |
-| **Tool Selection**    | Driven by LLM decisions; easily overridden           |
-| **Visual Tools**      | OCR / ASR / DET used conditionally based on question |
-| **Eval Report**       | Reward signal used for training supervision          |
-| **Inference Backend** | Swap between LLaVA, Qwen, or custom adapters         |
+| Component             | Customizable Capability                                                               |
+| --------------------- | ------------------------------------------------------------------------------------- |
+| **Model Loader**      | Plug in any VLLM, CLIP, ASR, or Whisper model via the `path_dict` configuration       |
+| **Prompt Templates**  | Fully modular and composable for different tasks (e.g., QA, captioning, reasoning)    |
+| **Tool Selection**    | Dynamically guided by LLM reasoning; override logic easily for custom workflows       |
+| **Visual Tools**      | Conditionally invoked (OCR / ASR / DET / Scene Graph / etc.) based on the input query |
+| **Evaluation Report** | Structured feedback usable as a reward signal in SFT, DPO, GRPO, or RLHF pipelines    |
+| **Inference Backend** | Easily switch between LLaVA, Qwen, Vicuna, or custom VLLM adapters with no rewiring   |
+
+> 🧩 ReAgent-V is designed for **plug-and-play extensibility**, enabling effortless adaptation to new tools, models, and tasks—without modifying the core pipeline logic.
 
 
 ---
@@ -287,12 +384,12 @@ final_answer = qa_system.get_reflective_final_answer(...)
 
 ### 2. Smart Multimodal Retrieval
 
-* Combines **OCR**, **ASR**, **Scene Graph**, and optional **RAG** retrieval in one unified pipeline.
+* Combines **OCR**, **ASR**, **Scene Graph**, and other optional **RAG** retrieval in one unified pipeline.
 * **Dynamic tool-switching**: ReAgentV intelligently decides which modules to activate for each query—no manual toggles required.
 
 ### 3. Flexible Prompt Builder
 
-* Synthesizes raw OCR text, ASR transcripts, detected object labels, and keyword-based scene graph relations into a single, coherent prompt.
+* Synthesizes raw OCR text, ASR transcripts, detected object labels, keyword-based scene graph relations and other optional **RAG** into a single, coherent prompt.
 * Compatible with **Zero-Shot**, **Few-Shot**, or custom template prompts—fine-tune it to your exact needs.
 
 ### 4. OSS(Open-sourced Models)-Powered Inference & Reflection
@@ -362,8 +459,20 @@ Final Answer:
 * **Extend Tools**
   Easily drop in new modules—like caption translation, action recognition, or advanced video summarization—by adding code under `tools/` and updating `retrieve_modal_info`.
 
-* **Tune Config Values**
-  Open `ReAgentV_config/config.yaml` to tweak detection thresholds, RAG passage counts, beam sizes—gain granular control like a world-class lab.
+### ⚙️ **Tune Config Values**
+
+Open `ReAgentV_config/config.yaml` to customize core settings, including:
+
+* 🎯 Detection thresholds
+* 📖 RAG passage counts
+* 🌀 Beam sizes for decoding
+* 🧠 Tool usage preferences (e.g., enable/disable OCR, ASR, Scene Graph)
+
+> 🛠️ Tool activation is currently governed by **question semantics** and explicitly tied to modules like **OCR**, **ASR**, and **Scene Graph**.
+> 🧩 Want to add more visual tools (e.g., **captioning**, **layout analysis**, **object tracking**)?
+> Simply **extend the config** to register the tool, define its activation logic, and set relevant parameters (e.g., confidence thresholds, max outputs).
+
+> 🎛️ This design gives you **complete control** over tool orchestration—**enabling lightweight or rich multimodal reasoning pipelines** depending on your use case.
 
 ---
 
@@ -372,7 +481,3 @@ Final Answer:
 * Built on top of **OpenAI’s CLIP**, **Whisper**, and **LLaVA** models—leveraging state-of-the-art architectures for multimodal understanding.
 * Thanks to **Hugging Face** for maintaining an unparalleled model hub and community ecosystem.
 * Licensed under the **MIT License**. Use it in academia or enterprise—modify, distribute, and innovate without restrictions. Contributions (Issues, Pull Requests) are highly welcome.
-
----
-
-#### ReAgentV isn’t just software; it’s **the future of Video-QA**—engineered by experts, for experts. Dive in, customize, and witness how top-tier AI can transform video understanding into actionable intelligence!
