@@ -15,7 +15,7 @@ This repository provides the official implementation of
 
 # 📌 Overview
 ![Framework Overview](assets/framework.png)  
-ReAgent-V consists of two major components:
+### ReAgent-V consists of two major components:
 
 ## 🎥 Video Understanding 
 
