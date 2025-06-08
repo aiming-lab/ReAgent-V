@@ -55,7 +55,7 @@ def load_default(path_dict):
         cache_dir=path_dict["whisper_cache_dir"]
     )
 
-    # Load LLaVA
+    # Load LLaVA (other open-source models can also be used)
     overwrite_config = {}
     tokenizer, model, image_processor, max_length = load_pretrained_model(
         path_dict["llava_model_path"],
