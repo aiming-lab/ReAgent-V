@@ -169,7 +169,7 @@ ReAgentV-NeXT/                             # Repository root
 
 ## 🚀 Key Features
 
-### 1. Industry-Leading Frame Selection (ECRS)
+### 1. Accurate Frame Selection (ECRS)
 
 * **Entropy-Calibrated Ranking** for picking the most informative frames.
 * Extract up to hundreds of frames and automatically downselect to the top-𝑘 that matter, saving GPU memory and inference time.
@@ -179,12 +179,12 @@ ReAgentV-NeXT/                             # Repository root
 * Combines **OCR**, **ASR**, **Scene Graph**, and optional **RAG** retrieval in one unified pipeline.
 * **Dynamic tool-switching**: ReAgentV intelligently decides which modules to activate for each query—no manual toggles required.
 
-### 3. Next-Gen Prompt Builder
+### 3. Flexible Prompt Builder
 
 * Synthesizes raw OCR text, ASR transcripts, detected object labels, and keyword-based scene graph relations into a single, coherent prompt.
 * Compatible with **Zero-Shot**, **Few-Shot**, or custom template prompts—fine-tune it to your exact needs.
 
-### 4. LLaVA-Powered Inference & Reflection
+### 4. OSS(Open-sourced Models)-Powered Inference & Reflection
 
 * **Initial Answer**: LLaVA digests the multimodal prompt and video tensor to generate a base response.
 * **Critical Questions**: Automated follow-up question generation to probe potential weaknesses in the initial answer.
