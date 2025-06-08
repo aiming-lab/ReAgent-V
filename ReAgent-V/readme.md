@@ -1,7 +1,47 @@
-# ReAgentV: A Reward-Driven Multi-Agent Framework for Video Understanding
+# 🧠 ReAgent-V: A Reward-Driven Multi-Agent Framework for Video Understanding
 
-**ReAgentV** is not just another Video-QA toolkit—it's the apex of open-source intelligence, seamlessly integrating cutting-edge multimodal retrieval with the most advanced LLaVA inference pipeline. Engineered by top-tier researchers and practitioners, this project delivers industry-defining performance in understanding, reasoning, and reflecting on video content. Whether you need to extract text from frames, transcribe speech, detect objects, or generate world-class answers, ReAgentV is your definitive choice.
+**ReAgent-V** is a flexible and modular video understanding framework that goes far beyond traditional Video-QA systems. It seamlessly integrates:
 
+- 🔍 **Entropy-calibrated frame selection**
+- 🛠️ **Tool-augmented reasoning with dynamic tool invocation**
+- 🪞 **Multi-perspective reflection strategies** (conservative, neutral, aggressive)
+- 🧾 **Real-time, inference-aware reward generation**
+
+---
+
+### 🔧 Modular Tool Integration
+
+ReAgent-V features a **plug-and-play tool architecture**, enabling adaptive invocation of a wide array of tools:
+
+- **OCR** / **ASR** / **Object Detection (DET)**
+- **Scene Graph Generation**
+- **Captioning Models**
+- **Multimodal Matchers (e.g., CLIP)**
+- **Video Reasoning Modules**
+
+Each tool is integrated using **customized prompt templates** based on the task and context, ensuring precision and adaptability.
+
+---
+
+### 🧠 Reflective Agentic Reasoning
+
+ReAgent-V employs a **critic agent** to evaluate answers in real time and generate structured feedback. This feedback enables:
+
+- Conservative answer refinement (output-only)
+- Neutral refinement (entity-aware)
+- Aggressive reasoning revision (entity + logic)
+
+The system aggregates these reflections to produce a robust final answer.
+
+---
+
+### 🏆 Self-Improving via Reward-Based Feedback
+
+The generated evaluation reports serve dual roles:
+- Guiding real-time inference refinement
+- Selecting high-quality samples for training via **SFT**, **DPO**, and **GRPO**
+
+This creates a **data-centric feedback loop** for continual model improvement.
 ---
 
 ## 🌐 Project Structure
