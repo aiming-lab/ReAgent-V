@@ -8,9 +8,6 @@
     <a href="https://arxiv.org/abs/2506.01300"><img src="assets/Paper-Arxiv-orange.svg" ></a>
 </div>
 
-## News
-* 🔥 [10.03] Our paper is online now: https://arxiv.org/abs/2506.01300.
-
 **ReAgent-V** is a **modular**, **extensible**, and **reward-aware** video reasoning framework designed to elevate video question answering and reasoning through:
 
 - 🔧 **Flexible Tool Integration** — Plug-and-play support for OCR, ASR, object detection, scene graph generation, captioning, and more  
@@ -18,7 +15,12 @@
 - 🎯 **Adaptive Model Alignment** — Aligns models dynamically based on inference-time feedback  
 - 🗂️ **High-Quality Data Selection** — Facilitates sample-efficient learning using reflective evaluation  
 - 📊 **Entropy-Calibrated Frame Selection** — Prioritizes key frames for focused reasoning  
-- 🔁 **Multi-Perspective Reflection** — Refines answers through debate among conservative, neutral, and aggressive viewpoints  
+- 🔁 **Multi-Perspective Reflection** — Refines answers through debate among conservative, neutral, and aggressive viewpoints
+
+  
+## News
+* 🔥 [10.03] Our paper is online now: https://arxiv.org/abs/2506.01300.
+
 
 ---
 
