@@ -27,8 +27,10 @@ ReAgent-V comprises two major components:
 - **Data Curation & Optimization**: Selects valuable reasoning samples for fine-tuning via SFT, DPO, and GRPO.
 
 📄 For technical details, see:  
-- [🧩 Framework Overview (PDF)](https://github.com/aiming-lab/ReAgent-V/blob/main/assets/framework.pdf)
-- 
+- [🧩 Framework Overview (PDF)]
+<div style="display: flex; justify-content: space-between; gap: 20px;">
+  <img src="https://github.com/aiming-lab/ReAgent-V/blob/main/assets/framework.pdf" alt="Project Logo" width="45%" />
+</div>
 - [⚙️ Prompt Templates and Tool Setup, etc.](https://github.com/aiming-lab/ReAgent-V/blob/main/ReAgent-V/readme.md)
 
 ---
