@@ -69,7 +69,7 @@ Aligns **Vision-Language-Action (VLA)** models using **Trajectory-wise Preferenc
 
 ReAgent-V enables **inference-time data curation** by leveraging real-time rewards and reflection-based diagnostics to **extract high-quality (video, description) pairs** for downstream training. Depending on the optimization paradigm, the extraction strategy varies:
 
----
+
 
 #### 🧪 For **SFT (Supervised Fine-Tuning)**
 
@@ -80,7 +80,7 @@ ReAgent-V can directly **collect samples with high reward scores** (from the eva
 
 > Simple, scalable, and label-efficient: reward scores enable dynamic filtering without manual annotation.
 
----
+
 
 #### 🔄 For **GRPO (Group Relative Policy Optimization)**
 
@@ -92,7 +92,7 @@ To construct robust **group preference datasets**, ReAgent-V focuses on **reflec
 
 > These serve as **strong preference signals** during group-level optimization in GRPO, identifying trajectories that required—but successfully underwent—revision.
 
----
+
 
 #### ⚖️ For **DPO (Direct Preference Optimization)**
 
@@ -109,6 +109,10 @@ ReAgent-V transitions from a reasoning agent to a **rewarding agent** by modifyi
 > 🌀 **Unified Insight**:
 > ReAgent-V closes the data curation loop. Its multi-agent reward pipeline not only improves current inference but **continuously supplies high-fidelity data** for future optimization—making learning systems **self-refining** in the wild.
 
+- 📁 Module: `ReAgent-V`  
+- 📘 Instructions: [Video Understanding README](https://github.com/aiming-lab/ReAgent-V/blob/main/ReAgent-V/README.md)
+
+  
 ## 🧑‍💻 Getting Started
 
 Each subfolder contains its own `README.md` with detailed installation, setup, and training instructions. To get started:
