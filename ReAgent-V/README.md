@@ -161,7 +161,7 @@ ReAgentV-NeXT/                             # Repository root
    }
    ```
 
-6. ## 🚀 Run the Pipeline
+## 🚀 Run the Pipeline
 
 ```bash
 python run_pipeline.py
