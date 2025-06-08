@@ -28,8 +28,8 @@ ReAgent-V consists of two major components:
 - **Multi-Agent Reflection**  
   Iteratively refines outputs by encouraging disagreement and consensus among diverse agent personas (conservative / neutral / aggressive).
 
-📄 **Technical Resources**  
-- [⚙️ Prompt Templates and Tool Setup Guide](https://github.com/aiming-lab/ReAgent-V/blob/main/ReAgent-V/readme.md)
+- 📁 Module: `ReAgent-V`  
+- 📘 Instructions: [Video Understanding README](https://github.com/aiming-lab/ReAgent-V/blob/main/ReAgent-V/README.md)
 
 ---
 
