@@ -162,13 +162,121 @@ ReAgentV-NeXT/                             # Repository root
    }
    ```
 
-6. **Run the Pipeline**
+6. ## 🚀 Run the Pipeline
 
-   ```bash
-   python run_pipeline.py
-   ```
+```bash
+python run_pipeline.py
+```
 
-   > At this point, you’ll witness ReAgentV’s lightning-fast frame extraction, laser-precise multimodal retrieval, and crystal-clear reflective answers in action.
+At this point, you’ll witness ReAgent-V in action: **lightning-fast frame extraction**, **precise multimodal retrieval**, and **reflective answer generation**—all orchestrated in a modular, extensible fashion.
+
+---
+
+## 🎬 Example: `run_pipeline.py` Walkthrough
+
+ReAgent-V’s inference script demonstrates a fully modular and highly adaptable architecture. Below is a breakdown of its flexible components:
+
+---
+
+### 🔗 1. Load Models — *Plug-and-Play VLLMs*
+
+```python
+qa_system = ReAgentV.load_default(path_dict)
+```
+
+* Easily switch between LLaVA, Qwen, Vicuna, or any VLLM model.
+* Paths are defined in `path_dict` and support HuggingFace snapshot-style loading.
+
+---
+
+### 🎞️ 2. Frame Sampling — *Context-Aware Selection*
+
+```python
+frames, key_frames, ... = qa_system.load_and_sample_video(question, video_path)
+```
+
+* Sampling adapts to the question (e.g., relevance-based, entropy-based).
+* Supports customization of sampling strategy and max frame count.
+
+---
+
+### 🛠️ 3. Visual Tool Invocation — *Dynamic Tool Use*
+
+```python
+modal_info, ..., USE_OCR, USE_ASR, USE_DET = qa_system.retrieve_modal_info(...)
+```
+
+* Tools like **OCR**, **ASR**, **Object Detection**, **Scene Graph** are triggered **based on question semantics**.
+* Tool usage flags are auto-determined or can be manually overridden.
+
+---
+
+### 🧩 4. Prompt Construction — *Compositional Prompt Templates*
+
+```python
+qs = qa_system.build_multimodal_prompt(...)
+```
+
+* Combines question + OCR text + ASR transcript + DET results.
+* Templates are modular and can be adapted for different tasks (e.g., reasoning, captioning, QA).
+
+---
+
+### 🧠 5. Inference — *Flexible Backend Execution*
+
+```python
+initial_answer = llava_inference(qs, video_tensor)
+```
+
+* Works with VLLM server, REST APIs, or custom inference backends.
+* Swap the engine without modifying core pipeline logic.
+
+---
+
+### 🔄 6. Tool Re-selection via Critical Questions
+
+```python
+critique_questions = qa_system.generate_critical_questions(...)
+```
+
+* Automatically generates new questions to probe the initial answer.
+* Re-selects tools per follow-up question using language-only inference.
+
+---
+
+### 📋 7. Evaluation Report — *Structured Feedback as Reward*
+
+```python
+eval_report = qa_system.generate_eval_report(...)
+```
+
+* Summarizes strengths, flaws, and missing evidence.
+* Can be reused as **reward signal** for RLHF, DPO, or GRPO-style training.
+
+---
+
+### 🪞 8. Reflective Answer Refinement
+
+```python
+final_answer = qa_system.get_reflective_final_answer(...)
+```
+
+* Produces improved answers using multi-perspective critique.
+* Supports **conservative**, **neutral**, and **aggressive** reflection strategies.
+
+---
+
+## ✅ Flexibility Summary
+
+| Component             | Customizable Feature                                 |
+| --------------------- | ---------------------------------------------------- |
+| **Model Loader**      | Any VLLM, CLIP, ASR, Whisper via `path_dict`         |
+| **Prompt Templates**  | Modular, composable prompts for diverse task types   |
+| **Tool Selection**    | Driven by LLM decisions; easily overridden           |
+| **Visual Tools**      | OCR / ASR / DET used conditionally based on question |
+| **Eval Report**       | Reward signal used for training supervision          |
+| **Inference Backend** | Swap between LLaVA, Qwen, or custom adapters         |
+
 
 ---
 
