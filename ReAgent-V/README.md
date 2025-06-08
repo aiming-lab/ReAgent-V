@@ -1,5 +1,3 @@
-# 🧠 ReAgent-V: A Reward-Driven Multi-Agent Framework for Video Understanding
-
 **ReAgent-V** is a flexible and modular video understanding framework that goes far beyond traditional Video-QA systems. It seamlessly integrates:
 
 - 🔍 **Entropy-calibrated frame selection**
