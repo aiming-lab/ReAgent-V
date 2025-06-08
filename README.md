@@ -67,7 +67,7 @@ Aligns **Vision-Language-Action (VLA)** models using **Trajectory-wise Preferenc
 
 ### 📈 Reward-Aware Data Curation and Collection for SFT, DPO, GRPO, and Beyond
 
-ReAgent-V enables **inference-time data curation** by leveraging real-time rewards and reflection-based diagnostics to **extract high-quality (video, description) pairs** for downstream training. Depending on the optimization paradigm, the extraction strategy varies:
+ReAgent-V enables **inference-time data curation** by leveraging real-time rewards and reflection-based diagnostics depending on the optimization paradigm, the extraction strategy varies:
 
 
 #### 🧪 For **SFT (Supervised Fine-Tuning)**
