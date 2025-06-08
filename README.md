@@ -46,7 +46,7 @@
 ReAgent-V supports a range of real-world tasks via dedicated application modules:
 
 ### 🧭 VLA Alignment  
-Aligns **Vision-Language-Action (VLA)** models using **Trajectory-wise Preference Optimization (TPO)** guided by ReAgent-V’s reward feedback.
+Aligns **Vision-Language-Action (VLA)** models using **Trajectory-wise Preference Optimization (TPO)** guided by ReAgent-V’s reward feedback. Specifically, ReAgent-V evaluates each trajectory across multiple axes—such as task success, temporal stability, visual grounding, and semantic precision—and performs multi-agent reflection to produce refined, high-fidelity reward scores for alignment.
 
 - 📁 Module: `Application/VLA-Alignment`  
 - 📘 Instructions: [VLA Alignment README](https://github.com/aiming-lab/ReAgent-V/blob/main/Application/VLA-Alignment/README.md)
@@ -65,10 +65,9 @@ Aligns **Vision-Language-Action (VLA)** models using **Trajectory-wise Preferenc
 - 📁 Module: `ReAgent-V`  
 - 📘 Instructions: [Video Understanding README](https://github.com/aiming-lab/ReAgent-V/blob/main/ReAgent-V/README.md)
 
-### 📈 Reward-Aware Data Curation and Collection for GRPO / SFT / DPO
+### 📈 Reward-Aware Data Curation and Collection for SFT, DPO, GRPO, and Beyond
 
 ReAgent-V enables **inference-time data curation** by leveraging real-time rewards and reflection-based diagnostics to **extract high-quality (video, description) pairs** for downstream training. Depending on the optimization paradigm, the extraction strategy varies:
-
 
 
 #### 🧪 For **SFT (Supervised Fine-Tuning)**
