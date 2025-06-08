@@ -47,7 +47,7 @@
   Efficiently selects the most informative frames for video reasoning.
 
 - **Tool-Augmented Inference**  
-  Dynamically integrates multimodal tools including OCR, ASR, object detection, scene graph generation, and captioning.
+  Dynamically integrates multimodal tools including OCR, ASR, object detection, scene graph generation, and captioning, etc.
 
 - **Multi-Agent Reflection**  
   Iteratively refines outputs by encouraging disagreement and consensus among diverse agent personas (conservative / neutral / aggressive).
