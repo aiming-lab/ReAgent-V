@@ -1,10 +1,16 @@
 # ReAgent-V: A Reward-Driven Multi-Agent Framework for Video Understanding
 
+<p align="center">
+  <a href="https://yiyangzhou.github.io/">Yiyang Zhou*</a>, 
+  <a href="https://github.com/codepassionor">Yangfan He*</a>, 
+  <a href="https://github.com/InfiniteLoopCoder">Yaofeng Su</a>, 
+  <a href="https://github.com/Lillianwei-h">Siwei Han</a>, 
+  <a href="https://github.com/joeljang">Joel Jang</a>, 
+  <a href="https://www.gedasbertasius.com/">Gedas Bertasius</a>, 
+  <a href="https://www.cs.unc.edu/~mbansal/">Mohit Bansal</a>, 
+  <a href="https://www.huaxiuyao.io/">Huaxiu Yao</a>
+</p>
 
-<div align="center">
-[Yiyang Zhou*](https://yiyangzhou.github.io/), [Yangfan He*](https://github.com/codepassionor), [Yaofeng Su](https://github.com/InfiniteLoopCoder),  [Siwei Han](https://github.com/Lillianwei-h), [Joel Jang](https://github.com/joeljang), [Gedas Bertasius](https://www.gedasbertasius.com/), [Mohit Bansal](https://www.cs.unc.edu/~mbansal/), [Huaxiu Yao](https://www.huaxiuyao.io/)
-
-</div>
 
 <div align="center">
 *Equal Contribution
