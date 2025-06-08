@@ -1,7 +1,7 @@
 # ReAgent-V: A Reward-Driven Multi-Agent Framework for Video Understanding
 
 <p align="center">
-  <a href="https://yiyangzhou.github.io/">Yiyang Zhou*</a>, 
+  <a href="https://github.com/YiyangZhou">Yiyang Zhou*</a>, 
   <a href="https://github.com/codepassionor">Yangfan He*</a>, 
   <a href="https://github.com/InfiniteLoopCoder">Yaofeng Su</a>, 
   <a href="https://github.com/Lillianwei-h">Siwei Han</a>, 
