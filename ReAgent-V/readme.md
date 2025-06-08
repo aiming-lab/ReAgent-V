@@ -265,6 +265,3 @@ Final Answer:
 ---
 
 #### ReAgentV isn’t just software; it’s **the future of Video-QA**—engineered by experts, for experts. Dive in, customize, and witness how top-tier AI can transform video understanding into actionable intelligence!
-
-```
-```
