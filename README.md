@@ -94,11 +94,11 @@ To curate high-value training data for GRPO, ReAgent-V employs a **reflection-tr
 
 ReAgent-V supports **Direct Preference Optimization (DPO)** by reframing itself from a video reasoning agent into a **reward-generating agent**. This is achieved through a **task template modification** that emphasizes **evaluating answer quality** rather than producing a single correct answer.
 
-* 🧠 Transforms the task from “answer the video question” into **“compare and prefer among candidate answers”** based on visual evidence.
+* 🧠 Transforms the task from “answer the video question” into **“score the video from different perspectives”** based on visual evidence.
 
-* ♻️ Uses multi-perspective reflection outputs (e.g., **conservative**, **neutral**, **aggressive**) to generate **candidate answers**.
+* ♻️ Uses multi-perspective reflection outputs (e.g., **conservative**, **neutral**, **aggressive**) to generate **candidate rewards**.
 
-* 📊 Each candidate is scored along **customizable reward dimensions**, such as:
+* 📊 Each candidate reward is generated along **customizable reward dimensions**, such as:
 
   * 🎯 Visual alignment
   * ⏱️ Temporal accuracy
@@ -106,7 +106,7 @@ ReAgent-V supports **Direct Preference Optimization (DPO)** by reframing itself 
   * 🧠 Reasoning specificity
   * 🔍 Option disambiguation
 
-* ✅ The system identifies the answer with the **highest aggregated reflection reward** as the preferred choice.
+* ✅ The system identifies the answer with the **higher reflection reward** as the preferred choice.
 
 * 🔗 Constructs (preferred, rejected) pairs from these outputs to serve as **DPO training data**.
 
