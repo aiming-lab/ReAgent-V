@@ -22,7 +22,7 @@ ReAgent-V consists of two main components:
 
 For more details, refer to:
 - [Framework Overview](./assets/framework.pdf)
-- [Prompt Templates and Tool Setup](https://github.com/aiming-lab/ReAgent-V/blob/main/ReAgent-V/readme.md)
+- [Prompt Templates and Tool Setup, etc.](https://github.com/aiming-lab/ReAgent-V/blob/main/ReAgent-V/readme.md)
 
 ---
 
