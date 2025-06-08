@@ -1,64 +1,74 @@
 # 🧠 ReAgent-V
 
-This repository contains the official implementation of  
+This repository provides the official implementation of  
 **[ReAgent-V: A Reward-Driven Multi-Agent Framework for Video Understanding](https://arxiv.org/abs/2506.01300)**.
 
-**ReAgent-V** is a **modular, extensible, and reward-aware video reasoning framework**. It empowers video question answering and reasoning with:
+**ReAgent-V** is a **modular**, **extensible**, and **reward-aware** video reasoning framework designed to elevate video question answering and reasoning through:
 
-- 🔧 **Flexible tool integration** (e.g., OCR, ASR, object detection)
-- 🧠 **Reward-guided inference** for real-time self-correction
-- 🎯 **Adaptive model alignment** driven by structured feedback
-- 🗂️ **High-quality data selection** for sample-efficient learning
-- 📊 **Entropy-calibrated frame selection** to focus on key moments
-- 🔁 **Multi-perspective reflection** (conservative, neutral, aggressive) for answer refinement
+- 🔧 **Flexible Tool Integration** — Plug-and-play support for OCR, ASR, object detection, scene graph generation, captioning, and more  
+- 🧠 **Reward-Guided Inference** — Enables real-time self-correction via structured reward signals  
+- 🎯 **Adaptive Model Alignment** — Aligns models dynamically based on inference-time feedback  
+- 🗂️ **High-Quality Data Selection** — Facilitates sample-efficient learning using reflective evaluation  
+- 📊 **Entropy-Calibrated Frame Selection** — Prioritizes key frames for focused reasoning  
+- 🔁 **Multi-Perspective Reflection** — Refines answers through debate among conservative, neutral, and aggressive viewpoints  
 
 ---
 
 ## 📌 Overview
 
-ReAgent-V comprises two major components:
+ReAgent-V consists of two major components:
 
 ### 🎥 Video Understanding Framework
 
-- **Entropy-Calibrated Frame Selection**: Identifies the most informative video segments for reasoning.
-- **Tool-Augmented Inference**: Dynamically invokes OCR, ASR, object detection, scene graph generation, captioning, and more.
-- **Multi-Agent Reflection**: Refines answers through iterative debate from multiple viewpoints.
+- **Entropy-Calibrated Frame Selection**  
+  Efficiently selects the most informative frames for video reasoning.
 
-📄 For technical details, see:  
-- ![Framework Overview](./assets/framework.png)
-- [⚙️ Prompt Templates and Tool Setup, etc.](https://github.com/aiming-lab/ReAgent-V/blob/main/ReAgent-V/readme.md)
+- **Tool-Augmented Inference**  
+  Dynamically integrates multimodal tools including OCR, ASR, object detection, scene graph generation, and captioning.
+
+- **Multi-Agent Reflection**  
+  Iteratively refines outputs by encouraging disagreement and consensus among diverse agent personas (conservative / neutral / aggressive).
+
+📄 **Technical Resources**  
+- ![Framework Overview](./assets/framework.png)  
+- [⚙️ Prompt Templates and Tool Setup Guide](https://github.com/aiming-lab/ReAgent-V/blob/main/ReAgent-V/readme.md)
 
 ---
 
-### 🚀 Applications
+## 🚀 Applications
 
-ReAgent-V powers a variety of real-world tasks through specialized application modules:
+ReAgent-V supports a range of real-world tasks via dedicated application modules:
 
-#### 🧭 VLA Alignment
+### 🧭 VLA Alignment  
+Aligns **Vision-Language-Action (VLA)** models using **Trajectory-wise Preference Optimization (TPO)** guided by ReAgent-V’s reward feedback.
 
-Aligns **Vision-Language-Action (VLA)** models using **Trajectory-wise Preference Optimization (TPO)** driven by ReAgent-V’s reward signals.
-
-- 📂 Module: `Application/VLA-Alignment`  
+- 📁 Module: `Application/VLA-Alignment`  
 - 📘 Instructions: [VLA Alignment README](https://github.com/aiming-lab/ReAgent-V/blob/main/Application/VLA-Alignment/README.md)
 
-#### 🔍 Video LLM Reasoning
+### 🔍 Video LLM Reasoning *(Coming Soon)*  
+Supports reflection-based evaluation and reward-guided sample curation for long-form video LLM fine-tuning using **GRPO** strategies.
 
-Leverages reflection-guided evaluation to curate training samples for **GRPO-based long-form video LLM fine-tuning**.
-
-- 📂 Module: `Application/LLM-Reasoning` *(Coming Soon)*
+- 📁 Module: `Application/LLM-Reasoning`  
 
 ---
 
 ## 🧑‍💻 Getting Started
 
-To get started, please refer to the `README.md` in each subfolder for installation, setup, and training instructions.
+Each subfolder contains its own `README.md` with detailed installation, setup, and training instructions. To get started:
 
-If you have questions or encounter any issues, feel free to open an [issue](https://github.com/aiming-lab/ReAgent-V/issues) or contact the maintainers.
+1. Clone the repository  
+2. Follow the environment setup and requirements in each module  
+3. Explore the demo scripts and customize as needed
 
+💬 If you have questions or encounter any issues, feel free to open an [issue](https://github.com/aiming-lab/ReAgent-V/issues) or contact the maintainers.
 
-Citation
-If you find our code or models useful in your work, please cite our paper: [ReAgent-V](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C24&q=ReAgent-V%3A+A+Reward-Driven+Multi-Agent+Framework+for+Video+Understanding&btnG=)
+---
 
+## 📚 Citation
+
+If you find ReAgent-V helpful in your research or projects, please consider citing:
+
+```bibtex
 @article{zhou2025reagent,
   title={ReAgent-V: A Reward-Driven Multi-Agent Framework for Video Understanding},
   author={Zhou, Yiyang and He, Yangfan and Su, Yaofeng and Han, Siwei and Jang, Joel and Bertasius, Gedas and Bansal, Mohit and Yao, Huaxiu},
