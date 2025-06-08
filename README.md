@@ -87,8 +87,7 @@ To curate high-value training data for GRPO, ReAgent-V employs a **reflection-tr
 * 🎥 Each input is a **(video, text) pair**, typically comprising a video and its initial response.
 * 📊 During inference, ReAgent-V computes an **importance score** (denoted as `E.importance_score`) based on the critic agent’s **overall assessment of reasoning sufficiency**.
 * ❗ If this importance score falls **below a threshold** (e.g., `< 5 out of 10`), the sample is considered **difficult**, meaning the model struggled with initial reasoning and likely required further refinement.
-* 🔁 These low-score samples are then routed through **multi-perspective reflection** (conservative, neutral, aggressive), generating updated descriptions with enhanced logical and factual quality.
-* 📥 The resulting **(video, revised text)** samples are labeled as **reflection-worthy** and collected as **valuable candidates** for GRPO training.
+* 📥 The resulting **(video, text)** samples are labeled as **reflection-worthy** and collected as **valuable candidates** for GRPO training.
 
 
 #### ⚖️ For **DPO (Direct Preference Optimization)**
