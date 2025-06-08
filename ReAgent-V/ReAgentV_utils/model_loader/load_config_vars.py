@@ -2,15 +2,7 @@ import yaml
 import os
 
 def load_config_vars(yaml_path=None):
-    """
-    读取指定路径下的 config.yaml，并将其中的键值对加载后，
-    返回以下变量依次对应的值：
-    rag_threshold, clip_threshold, beta,
-    USE_OCR, USE_ASR, USE_DET,
-    max_frames_num, device
-
-    如果 yaml_path 为空，则默认在当前脚本同级目录寻找 "config.yaml"。
-    """
+  
     if yaml_path is None:
         yaml_path = os.path.join(os.path.dirname(__file__), "config.yaml")
     with open(yaml_path, "r", encoding="utf-8") as f:
