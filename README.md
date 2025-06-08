@@ -1,5 +1,4 @@
 # 🧠 ReAgent-V
-![Framework Overview](assets/framework.png)  
 This repository provides the official implementation of  
 **[ReAgent-V: A Reward-Driven Multi-Agent Framework for Video Understanding](https://arxiv.org/abs/2506.01300)**.
 
@@ -15,7 +14,7 @@ This repository provides the official implementation of
 ---
 
 ## 📌 Overview
-
+![Framework Overview](assets/framework.png)  
 ReAgent-V consists of two major components:
 
 ### 🎥 Video Understanding Framework
