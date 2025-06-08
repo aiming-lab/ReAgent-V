@@ -13,11 +13,11 @@ This repository provides the official implementation of
 
 ---
 
-## 📌 Overview
+# 📌 Overview
 ![Framework Overview](assets/framework.png)  
 ReAgent-V consists of two major components:
 
-### 🎥 Video Understanding Framework
+## 🎥 Video Understanding 
 
 - **Entropy-Calibrated Frame Selection**  
   Efficiently selects the most informative frames for video reasoning.
