@@ -39,7 +39,17 @@
 
 # 📌 Overview
 ![Framework Overview](assets/framework.png)  
-### ReAgent-V consists of two major components:
+
+
+## 🚀 Applications
+
+ReAgent-V supports a range of real-world tasks via dedicated application modules:
+
+### 🧭 VLA Alignment  
+Aligns **Vision-Language-Action (VLA)** models using **Trajectory-wise Preference Optimization (TPO)** guided by ReAgent-V’s reward feedback.
+
+- 📁 Module: `Application/VLA-Alignment`  
+- 📘 Instructions: [VLA Alignment README](https://github.com/aiming-lab/ReAgent-V/blob/main/Application/VLA-Alignment/README.md)
 
 ## 🎥 Video Understanding 
 
@@ -55,18 +65,49 @@
 - 📁 Module: `ReAgent-V`  
 - 📘 Instructions: [Video Understanding README](https://github.com/aiming-lab/ReAgent-V/blob/main/ReAgent-V/README.md)
 
+## 📈 Reward-Aware Data Curation and Collection for GRPO / SFT / DPO
+
+ReAgent-V enables **inference-time data curation** by leveraging real-time rewards and reflection-based diagnostics to **extract high-quality (video, description) pairs** for downstream training. Depending on the optimization paradigm, the extraction strategy varies:
+
 ---
 
-## 🚀 Applications
+#### 🧪 For **SFT (Supervised Fine-Tuning)**
 
-ReAgent-V supports a range of real-world tasks via dedicated application modules:
+ReAgent-V can directly **collect samples with high reward scores** (from the evaluation report) without requiring additional reflection.
 
-### 🧭 VLA Alignment  
-Aligns **Vision-Language-Action (VLA)** models using **Trajectory-wise Preference Optimization (TPO)** guided by ReAgent-V’s reward feedback.
+* ✅ These samples indicate that the model’s initial reasoning is reliable.
+* 📥 Stored as supervised training pairs with accompanying scalar reward labels from the critic agent.
 
-- 📁 Module: `Application/VLA-Alignment`  
-- 📘 Instructions: [VLA Alignment README](https://github.com/aiming-lab/ReAgent-V/blob/main/Application/VLA-Alignment/README.md)
+> Simple, scalable, and label-efficient: reward scores enable dynamic filtering without manual annotation.
 
+---
+
+#### 🔄 For **GRPO (Group Relative Policy Optimization)**
+
+To construct robust **group preference datasets**, ReAgent-V focuses on **reflection-triggered examples**:
+
+* ❗ If the critic agent raises **critical questions**, the sample is flagged as **highly informative**.
+* 🔁 After multi-agent reflection, the updated description is assumed to carry **improved reasoning quality**.
+* 📊 Such video-description pairs are extracted and grouped into batches of high-reflection-value samples.
+
+> These serve as **strong preference signals** during group-level optimization in GRPO, identifying trajectories that required—but successfully underwent—revision.
+
+---
+
+#### ⚖️ For **DPO (Direct Preference Optimization)**
+
+ReAgent-V transitions from a reasoning agent to a **rewarding agent** by modifying the task template:
+
+* 🧠 Converts the task from “understand the video” to “rate or prefer descriptions based on visual evidence.”
+* 🧾 Generates preference pairs from **reflected answers** (e.g., aggressive vs conservative).
+* ✅ The version with the **higher reflection reward score** is selected as the preferred response.
+
+> ReAgent-V thus enables **dynamic preference data generation** from multi-perspective outputs and structured reward feedback.
+
+---
+
+> 🌀 **Unified Insight**:
+> ReAgent-V closes the data curation loop. Its multi-agent reward pipeline not only improves current inference but **continuously supplies high-fidelity data** for future optimization—making learning systems **self-refining** in the wild.
 
 ## 🧑‍💻 Getting Started
 
