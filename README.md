@@ -27,7 +27,8 @@ ReAgent-V comprises two major components:
 - **Data Curation & Optimization**: Selects valuable reasoning samples for fine-tuning via SFT, DPO, and GRPO.
 
 📄 For technical details, see:  
-- [🧩 Framework Overview (PDF)](./assets/framework.pdf)  
+- [🧩 Framework Overview (PDF)](https://github.com/aiming-lab/ReAgent-V/blob/main/assets/framework.pdf)
+- 
 - [⚙️ Prompt Templates and Tool Setup, etc.](https://github.com/aiming-lab/ReAgent-V/blob/main/ReAgent-V/readme.md)
 
 ---
@@ -56,3 +57,14 @@ Leverages reflection-guided evaluation to curate training samples for **GRPO-bas
 To get started, please refer to the `README.md` in each subfolder for installation, setup, and training instructions.
 
 If you have questions or encounter any issues, feel free to open an [issue](https://github.com/aiming-lab/ReAgent-V/issues) or contact the maintainers.
+
+
+Citation
+If you find our code or models useful in your work, please cite our paper: [ReAgent-V](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C24&q=ReAgent-V%3A+A+Reward-Driven+Multi-Agent+Framework+for+Video+Understanding&btnG=)
+
+@article{zhou2025reagent,
+  title={ReAgent-V: A Reward-Driven Multi-Agent Framework for Video Understanding},
+  author={Zhou, Yiyang and He, Yangfan and Su, Yaofeng and Han, Siwei and Jang, Joel and Bertasius, Gedas and Bansal, Mohit and Yao, Huaxiu},
+  journal={arXiv preprint arXiv:2506.01300},
+  year={2025}
+}
