@@ -1,12 +1,26 @@
 # ReAgent-V: A Reward-Driven Multi-Agent Framework for Video Understanding
 
-[Yiyang Zhou*](https://yiyangzhou.github.io/),   [Yangfan He*](https://github.com/codepassionor),   [Yaofeng Su](https://github.com/InfiniteLoopCoder),   [Siwei Han](https://github.com/Lillianwei-h),   [Joel Jang](https://github.com/joeljang), [Gedas Bertasius](https://www.gedasbertasius.com/),   [Mohit Bansal](https://www.cs.unc.edu/~mbansal/),   [Huaxiu Yao](https://www.huaxiuyao.io/)
+<div align="center">
+
+[Yiyang Zhou*](https://yiyangzhou.github.io/),  
+[Yangfan He*](https://github.com/codepassionor),  
+[Yaofeng Su](https://github.com/InfiniteLoopCoder),  
+[Siwei Han](https://github.com/Lillianwei-h),  
+[Joel Jang](https://github.com/joeljang),  
+[Gedas Bertasius](https://www.gedasbertasius.com/),  
+[Mohit Bansal](https://www.cs.unc.edu/~mbansal/),  
+[Huaxiu Yao](https://www.huaxiuyao.io/)
+
+</div>
+
 <div align="center">
 *Equal Contribution
 </div>
+
 <div align="center">
     <a href="https://arxiv.org/abs/2506.01300"><img src="assets/Paper-Arxiv-orange.svg" ></a>
 </div>
+
 
 **ReAgent-V** is a **modular**, **extensible**, and **reward-aware** video reasoning framework designed to elevate video question answering and reasoning through:
 
