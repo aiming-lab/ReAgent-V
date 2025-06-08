@@ -23,14 +23,9 @@ ReAgent-V comprises two major components:
 - **Entropy-Calibrated Frame Selection**: Identifies the most informative video segments for reasoning.
 - **Tool-Augmented Inference**: Dynamically invokes OCR, ASR, object detection, scene graph generation, captioning, and more.
 - **Multi-Agent Reflection**: Refines answers through iterative debate from multiple viewpoints.
-- **Inference-Time Reward Generation**: Produces structured feedback and scalar scores to guide real-time answer improvement.
-- **Data Curation & Optimization**: Selects valuable reasoning samples for fine-tuning via SFT, DPO, and GRPO.
 
 📄 For technical details, see:  
-- [🧩 Framework Overview (PDF)]
-<div style="display: flex; justify-content: space-between; gap: 20px;">
-  <img src="https://github.com/aiming-lab/ReAgent-V/blob/main/assets/framework.pdf" alt="Project Logo" width="45%" />
-</div>
+- ![Framework Overview](./assets/framework.png)
 - [⚙️ Prompt Templates and Tool Setup, etc.](https://github.com/aiming-lab/ReAgent-V/blob/main/ReAgent-V/readme.md)
 
 ---
