@@ -1,5 +1,5 @@
 ## **ReAgent-V**: Video Understanding with Real-Time, Inference-Time Reward Collection
-**ReAgent-V** is a flexible and modular video understanding framework that goes far beyond traditional Video-QA systems. It seamlessly integrates:
+**ReAgent-V** is a flexible and modular video understanding framework that goes beyond traditional multi-agent video understanding systems. It seamlessly integrates:
 
 - 🔍 **Entropy-calibrated frame selection**
 - 🛠️ **Tool-augmented reasoning with dynamic tool invocation**
