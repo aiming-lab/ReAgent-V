@@ -51,7 +51,7 @@ Aligns **Vision-Language-Action (VLA)** models using **Trajectory-wise Preferenc
 - 📁 Module: `Application/VLA-Alignment`  
 - 📘 Instructions: [VLA Alignment README](https://github.com/aiming-lab/ReAgent-V/blob/main/Application/VLA-Alignment/README.md)
 
-## 🎥 Video Understanding 
+### 🎥 Video Understanding 
 
 - **Entropy-Calibrated Frame Selection**  
   Efficiently selects the most informative frames for video reasoning.
@@ -65,7 +65,7 @@ Aligns **Vision-Language-Action (VLA)** models using **Trajectory-wise Preferenc
 - 📁 Module: `ReAgent-V`  
 - 📘 Instructions: [Video Understanding README](https://github.com/aiming-lab/ReAgent-V/blob/main/ReAgent-V/README.md)
 
-## 📈 Reward-Aware Data Curation and Collection for GRPO / SFT / DPO
+### 📈 Reward-Aware Data Curation and Collection for GRPO / SFT / DPO
 
 ReAgent-V enables **inference-time data curation** by leveraging real-time rewards and reflection-based diagnostics to **extract high-quality (video, description) pairs** for downstream training. Depending on the optimization paradigm, the extraction strategy varies:
 
@@ -81,7 +81,6 @@ ReAgent-V can directly **collect samples with high reward scores** (from the eva
 > Simple, scalable, and label-efficient: reward scores enable dynamic filtering without manual annotation.
 
 
-
 #### 🔄 For **GRPO (Group Relative Policy Optimization)**
 
 To curate high-value training data for GRPO, ReAgent-V employs a **reflection-triggering mechanism** grounded in **importance scoring**, effectively identifying **challenging yet informative** video-text samples during the *video understanding phase*.
@@ -91,10 +90,6 @@ To curate high-value training data for GRPO, ReAgent-V employs a **reflection-tr
 * ❗ If this importance score falls **below a threshold** (e.g., `< 5 out of 10`), the sample is considered **difficult**, meaning the model struggled with initial reasoning and likely required further refinement.
 * 🔁 These low-score samples are then routed through **multi-perspective reflection** (conservative, neutral, aggressive), generating updated descriptions with enhanced logical and factual quality.
 * 📥 The resulting **(video, revised text)** samples are labeled as **reflection-worthy** and collected as **valuable candidates** for GRPO training.
-
-> 🧠 **Key distinction**: the *importance score* here is not the multi-dimensional reward used in DPO-style reflection evaluation—it is a scalar difficulty indicator produced *before* reflection, during the initial reasoning phase.
-
-> 🌀 ReAgent-V thus transforms routine inference into **dynamic, value-aware data curation**, filtering samples not by correctness but by **how much they challenge the model**, which is vital for preference-based training in GRPO.
 
 
 #### ⚖️ For **DPO (Direct Preference Optimization)**
@@ -119,9 +114,6 @@ ReAgent-V supports **Direct Preference Optimization (DPO)** by reframing itself 
 
 > Unlike static or hand-crafted rewards, ReAgent-V’s feedback is **context-aware, multi-dimensional, and fully dynamic**, adapting to each video-question instance.
 
-
-📌 **Key Benefit**:
-This approach allows ReAgent-V to **autonomously produce fine-grained preference signals**, enabling robust DPO training without reliance on human annotators or rigid templates. The reward signal is grounded in **model-internal evaluation**, but made interpretable and composable.
 
 ---
 
