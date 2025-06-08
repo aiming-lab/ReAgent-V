@@ -1,0 +1,231 @@
+````markdown
+# ReAgentV: World-Class Multimodal Video Question Answering
+
+**ReAgentV** is not just another Video-QA toolkit—it's the apex of open-source intelligence, seamlessly integrating cutting-edge multimodal retrieval with the most advanced LLaVA inference pipeline. Engineered by top-tier researchers and practitioners, this project delivers industry-defining performance in understanding, reasoning, and reflecting on video content. Whether you need to extract text from frames, transcribe speech, detect objects, or generate world-class answers, ReAgentV is your definitive choice.
+
+---
+
+## 🌐 Project Structure
+
+```text
+ReAgentV-NeXT/                             # Repository root
+├── ReAgentV.py                           # Core engine: orchestrates multimodal retrieval, prompt synthesis, and QA flow
+├── run_pipeline.py                       # End-to-end demo: shows how to run the complete Video-QA pipeline
+├── ReAgentV_utils/                       # All utility modules and helper scripts
+│   ├── critical_question_generator/      # “Critical Question” generation logic
+│   │   └── generate_critical_question.py # Code to produce follow-up critical questions
+│   ├── frame_selection_ecrs/             # Entropy-Calibrated Frame Selection (ECRS) module
+│   │   └── ECRS_frame_selection.py       # ECRS implementation for optimal key-frame extraction
+│   ├── model_inference/                  # Inference wrappers for LLaVA and related models
+│   │   └── model_inference.py            # High-performance inference routines
+│   ├── model_loader/                     # Model initialization and config loader
+│   │   ├── load_config_vars.py           # Reads global YAML configuration
+│   │   └── load_default.py               # Launches CLIP, Whisper, LLaVA, etc., with best-practice defaults
+│   ├── prompt_builder/                   # Multimodal prompt assembly logic
+│   │   ├── build_multimodal_prompt.py    # Crafts the ultimate prompt from multimodal inputs
+│   │   └── prompt.py                     # Sophisticated prompt templates and formatting
+│   ├── ReAgentV_config/                  # Centralized configuration folder
+│   │   └── config.yaml                   # All thresholds, flags, and hyperparameters in one place
+│   └── tools/                            # Full suite of multimodal tools (OCR, ASR, Object Detection, etc.)
+│       ├── audio_tools/                  # Audio processing + advanced ASR
+│       │   └── asr_utils.py              # Speech-to-text implementation
+│       ├── ocr_tools/                    # OCR extraction and text processing
+│       │   └── ocr_utils.py              # OCR implementation
+│       ├── rag_retriever_dynamic.py      # Dynamic RAG (Retrieval-Augmented Generation) helper
+│       ├── scene_graph_tools/            # Scene Graph analysis & object detection
+│       │   ├── det_utils.py              # Object detection models + parsing utilities
+│       │   ├── filter_keywords.py        # Keyword extraction for guiding scene graph queries
+│       │   └── scene_graph.py            # Scene graph construction and relationship summarization
+│       ├── tool_selection.py             # Intelligent tool-selection logic per query
+│       └── video_processor/              # Video and audio preprocessing pipelines
+│           ├── process_audio.py          # High-fidelity audio extraction and pre-processing
+│           └── process_video.py          # ffmpeg-based frame sampling, resizing, and normalization
+├── models/                               # Pretrained model weights (CLIP, Whisper, LLaVA) and caches
+│   ├── clip-vit-large-patch14-336/       # CLIP weight snapshots
+│   │   └── snapshots/<commit-id>/        # Specific snapshot ID
+│   ├── whisper-large/                    # Whisper weight snapshots
+│   │   └── snapshots/<commit-id>/
+│   └── llava-video-7b-qwen2/             # LLaVA-Video-7B-Qwen2 weight snapshots
+│       └── snapshots/<commit-id>/
+├── requirements.txt                      # Python dependencies (for `pip install -r requirements.txt`)
+└── README.md                             # This file: world-class documentation
+````
+
+---
+
+## ⚡ Quickstart: Instant Expert Setup
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/aiming-lab/ReAgent-V.git
+   cd ReAgent-V
+   ```
+
+2. **Create and Activate a Conda Environment (Optional but Recommended)**
+
+   ```bash
+   conda create -n reagenv_env python=3.9 -y
+   conda activate reagenv_env
+   ```
+
+3. **Install Required Python Packages**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+   > We’ve curated a lean, battle-tested `requirements.txt`—no fluff, no conflicts. Just world-class AI libraries.
+
+4. **Download Pretrained Weights**
+
+   * **CLIP (ViT-L/14-336)**
+     Download from: `https://huggingface.co/openai/clip-vit-large-patch14-336`
+     Unpack under:
+
+     ```text
+     models/clip-vit-large-patch14-336/snapshots/<commit-id>/
+     ```
+
+   * **Whisper (Large)**
+     Download from: `https://huggingface.co/openai/whisper-large`
+     Unpack under:
+
+     ```text
+     models/whisper-large/snapshots/<commit-id>/
+     ```
+
+   * **LLaVA-Video-7B-Qwen2**
+     Download from: `https://huggingface.co/lmms-lab/LLaVA-Video-7B-Qwen2`
+     Unpack under:
+
+     ```text
+     models/llava-video-7b-qwen2/snapshots/<commit-id>/
+     ```
+
+   > Use the correct `<commit-id>` for reproducibility. Top experts track commits meticulously; so do we.
+
+5. **Configure `path_dict` in `run_pipeline.py`**
+
+   ```python
+   path_dict = {
+       "clip_model_path"   : "models/clip-vit-large-patch14-336/snapshots/ce19dc912ca5cd21c8a653c79e251e808ccabcd1",
+       "clip_cache_dir"    : "models/clip-vit-large-patch14-336",
+       "whisper_model_path": "models/whisper-large/snapshots/4ef9b41f0d4fe232daafdb5f76bb1dd8b23e01d7",
+       "whisper_cache_dir" : "models/whisper-large",
+       "llava_model_path"  : "models/llava-video-7b-qwen2/snapshots/013210b3aff822f1558b166d39c1046dd109520f",
+       "llava_cache_dir"   : "models/llava-video-7b-qwen2",
+   }
+   ```
+
+6. **Run the Pipeline**
+
+   ```bash
+   python run_pipeline.py
+   ```
+
+   > At this point, you’ll witness ReAgentV’s lightning-fast frame extraction, laser-precise multimodal retrieval, and crystal-clear reflective answers in action.
+
+---
+
+## 🚀 Key Features
+
+### 1. Industry-Leading Frame Selection (ECRS)
+
+* **Entropy-Calibrated Ranking** for picking the most informative frames.
+* Extract up to hundreds of frames and automatically downselect to the top-𝑘 that matter, saving GPU memory and inference time.
+
+### 2. Smart Multimodal Retrieval
+
+* Combines **OCR**, **ASR**, **Scene Graph**, and optional **RAG** retrieval in one unified pipeline.
+* **Dynamic tool-switching**: ReAgentV intelligently decides which modules to activate for each query—no manual toggles required.
+
+### 3. Next-Gen Prompt Builder
+
+* Synthesizes raw OCR text, ASR transcripts, detected object labels, and keyword-based scene graph relations into a single, coherent prompt.
+* Compatible with **Zero-Shot**, **Few-Shot**, or custom template prompts—fine-tune it to your exact needs.
+
+### 4. LLaVA-Powered Inference & Reflection
+
+* **Initial Answer**: LLaVA digests the multimodal prompt and video tensor to generate a base response.
+* **Critical Questions**: Automated follow-up question generation to probe potential weaknesses in the initial answer.
+* **Evaluation Report**: Structured feedback with numerical scores, categorical reasoning, and explicit “strength/weakness/missing info” fields.
+* **Reflective Final Answer**: A self-correcting mechanism that reallocates attention to overlooked video segments, ensuring your final answer is both precise and comprehensive.
+
+### 5. Modular & Extensible Design
+
+* Plug in new tools effortlessly: image subtitle translation, action recognition, video summarization, you name it.
+* Customize **`ReAgentV_config/config.yaml`** for threshold tuning, spatial/temporal parameters, and advanced flags—control every aspect like a world-class professional.
+
+---
+
+## ✨ Example Output
+
+````bash
+$ python run_pipeline.py
+Constructed Prompt:
+“Video QA: In these key frames, a robotic arm holds a folded cloth.
+ Frame 2: close-up of the hand grip.
+ OCR text detected: “CLEAN”.
+ ASR transcript: “Grab the blue cloth”.
+ Question: In the video, what is the robotic arm grabbing?”
+
+Initial Answer:
+“The robotic arm is grabbing a blue cloth.”
+
+Evaluation Report:
+```json
+{
+  "structured_feedback": "The initial answer 'The robotic arm is grabbing a cloth' is generally accurate based on the visible video evidence. However, it lacks temporal accuracy as there are no timestamps provided to confirm the exact moment of the action. Option disambiguation could be improved by specifying which cloth the robotic arm is grabbing, as there are multiple cloths in the scene. Reasoning specificity is adequate as the answer directly addresses the question. Linguistic precision is acceptable, but the answer could be more detailed by describing the specific cloth or its location.",
+  "scores": {
+    "visual_alignment": { "value": 4.0, "reason": "The answer aligns well with the visible video evidence." },
+    "temporal_accuracy": { "value": 2.0, "reason": "No timestamps are provided to confirm the exact moment of the action." },
+    "option_disambiguation": { "value": 3.0, "reason": "The answer does not specify which cloth is being grabbed." },
+    "reasoning_specificity": { "value": 4.0, "reason": "The answer directly addresses the question." },
+    "linguistic_precision": { "value": 3.5, "reason": "The answer is grammatically correct and semantically accurate, but could be more detailed." }
+  },
+  "total_score": 16.5,
+  "scalar_reward": 0.8
+}
+````
+
+Final Answer:
+
+```json
+{
+  "final_answer": "The kitchen sink is equipped with a modern faucet, a dish rack, and various cleaning supplies. A robotic arm is positioned above the sink, suggesting an automated or assistive cleaning system. The surrounding area includes a countertop with a soap dispenser and a towel."
+}
+```
+
+> Notice how ReAgentV extracts, analyzes, and refines—delivering not just an answer, but a **fully annotated reasoning journey** from raw video to final verdict.
+
+---
+
+## 🔧 Usage Tips & Pro-Tips
+
+* **Maximize GPU Efficiency**
+  Adjust `max_frames_num` in `load_and_sample_video` to fit your VRAM. Combine frames or downscale as needed.
+
+* **Customize Prompts**
+  Edit templates inside `prompt_builder/prompt.py` to align with your domain vocabulary—medical, industrial, retail, etc.
+
+* **Extend Tools**
+  Easily drop in new modules—like caption translation, action recognition, or advanced video summarization—by adding code under `tools/` and updating `retrieve_modal_info`.
+
+* **Tune Config Values**
+  Open `ReAgentV_config/config.yaml` to tweak detection thresholds, RAG passage counts, beam sizes—gain granular control like a world-class lab.
+
+---
+
+## 🌟 Acknowledgments & License
+
+* Built on top of **OpenAI’s CLIP**, **Whisper**, and **LLaVA** models—leveraging state-of-the-art architectures for multimodal understanding.
+* Thanks to **Hugging Face** for maintaining an unparalleled model hub and community ecosystem.
+* Licensed under the **MIT License**. Use it in academia or enterprise—modify, distribute, and innovate without restrictions. Contributions (Issues, Pull Requests) are highly welcome.
+
+---
+
+#### ReAgentV isn’t just software; it’s **the future of Video-QA**—engineered by experts, for experts. Dive in, customize, and witness how top-tier AI can transform video understanding into actionable intelligence!
+
+```
+```

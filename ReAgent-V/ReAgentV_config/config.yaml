@@ -1,0 +1,17 @@
+# config.yaml
+
+# General thresholds
+rag_threshold: 0.3
+clip_threshold: 0.3
+beta: 3.0
+
+# Tool toggles
+USE_OCR: false
+USE_ASR: false
+USE_DET: false
+
+# Video processing
+max_frames_num: 64
+
+# Device
+device: "cuda"
