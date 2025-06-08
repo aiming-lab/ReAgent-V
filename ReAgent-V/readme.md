@@ -1,4 +1,4 @@
-# ReAgentV: World-Class Multimodal Video Question Answering
+# ReAgentV: A Reward-Driven Multi-Agent Framework for Video Understanding
 
 **ReAgentV** is not just another Video-QA toolkit—it's the apex of open-source intelligence, seamlessly integrating cutting-edge multimodal retrieval with the most advanced LLaVA inference pipeline. Engineered by top-tier researchers and practitioners, this project delivers industry-defining performance in understanding, reasoning, and reflecting on video content. Whether you need to extract text from frames, transcribe speech, detect objects, or generate world-class answers, ReAgentV is your definitive choice.
 
