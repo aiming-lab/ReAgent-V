@@ -84,25 +84,44 @@ ReAgent-V can directly **collect samples with high reward scores** (from the eva
 
 #### 🔄 For **GRPO (Group Relative Policy Optimization)**
 
-To construct robust **group preference datasets**, ReAgent-V focuses on **reflection-triggered examples**:
+To curate high-value training data for GRPO, ReAgent-V employs a **reflection-triggering mechanism** grounded in **importance scoring**, effectively identifying **challenging yet informative** video-text samples during the *video understanding phase*.
 
-* ❗ If the critic agent raises **critical questions**, the sample is flagged as **highly informative**.
-* 🔁 After multi-agent reflection, the updated description is assumed to carry **improved reasoning quality**.
-* 📊 Such video-description pairs are extracted and grouped into batches of high-reflection-value samples.
+* 🎥 Each input is a **(video, text) pair**, typically comprising a video and its initial response.
+* 📊 During inference, ReAgent-V computes an **importance score** (denoted as `E.importance_score`) based on the critic agent’s **overall assessment of reasoning sufficiency**.
+* ❗ If this importance score falls **below a threshold** (e.g., `< 5 out of 10`), the sample is considered **difficult**, meaning the model struggled with initial reasoning and likely required further refinement.
+* 🔁 These low-score samples are then routed through **multi-perspective reflection** (conservative, neutral, aggressive), generating updated descriptions with enhanced logical and factual quality.
+* 📥 The resulting **(video, revised text)** samples are labeled as **reflection-worthy** and collected as **valuable candidates** for GRPO training.
 
-> These serve as **strong preference signals** during group-level optimization in GRPO, identifying trajectories that required—but successfully underwent—revision.
+> 🧠 **Key distinction**: the *importance score* here is not the multi-dimensional reward used in DPO-style reflection evaluation—it is a scalar difficulty indicator produced *before* reflection, during the initial reasoning phase.
 
+> 🌀 ReAgent-V thus transforms routine inference into **dynamic, value-aware data curation**, filtering samples not by correctness but by **how much they challenge the model**, which is vital for preference-based training in GRPO.
 
 
 #### ⚖️ For **DPO (Direct Preference Optimization)**
 
-ReAgent-V transitions from a reasoning agent to a **rewarding agent** by modifying the task template:
+ReAgent-V supports **Direct Preference Optimization (DPO)** by reframing itself from a video reasoning agent into a **reward-generating agent**. This is achieved through a **task template modification** that emphasizes **evaluating answer quality** rather than producing a single correct answer.
 
-* 🧠 Converts the task from “understand the video” to “rate or prefer descriptions based on visual evidence.”
-* 🧾 Generates preference pairs from **reflected answers** (e.g., aggressive vs conservative).
-* ✅ The version with the **higher reflection reward score** is selected as the preferred response.
+* 🧠 Transforms the task from “answer the video question” into **“compare and prefer among candidate answers”** based on visual evidence.
 
-> ReAgent-V thus enables **dynamic preference data generation** from multi-perspective outputs and structured reward feedback.
+* ♻️ Uses multi-perspective reflection outputs (e.g., **conservative**, **neutral**, **aggressive**) to generate **candidate answers**.
+
+* 📊 Each candidate is scored along **customizable reward dimensions**, such as:
+
+  * 🎯 Visual alignment
+  * ⏱️ Temporal accuracy
+  * 💬 Linguistic precision
+  * 🧠 Reasoning specificity
+  * 🔍 Option disambiguation
+
+* ✅ The system identifies the answer with the **highest aggregated reflection reward** as the preferred choice.
+
+* 🔗 Constructs (preferred, rejected) pairs from these outputs to serve as **DPO training data**.
+
+> Unlike static or hand-crafted rewards, ReAgent-V’s feedback is **context-aware, multi-dimensional, and fully dynamic**, adapting to each video-question instance.
+
+
+📌 **Key Benefit**:
+This approach allows ReAgent-V to **autonomously produce fine-grained preference signals**, enabling robust DPO training without reliance on human annotators or rigid templates. The reward signal is grounded in **model-internal evaluation**, but made interpretable and composable.
 
 ---
 
